@@ -1,0 +1,48 @@
+import { ProductLine, Invoice } from './types'
+
+export const initialProductLine: ProductLine = {
+    description: 'test',
+    quantity: '1',
+    rate: '0.00',
+}
+
+export const initialInvoice: Invoice = {
+    logo: '',
+    logoWidth: 100,
+    title: 'INVOICE',
+    companyName: '',
+    name: '',
+    companyAddress: '',
+    companyAddress2: '',
+    companyCountry: 'United States',
+    billTo: 'Bill To:',
+    clientName: '',
+    clientAddress: '',
+    clientAddress2: '',
+    clientCountry: 'United States',
+    invoiceTitleLabel: 'Invoice #',
+    invoiceTitle: '',
+    invoiceDateLabel: 'Invoice Date',
+    invoiceDate: '',
+    invoiceDueDateLabel: 'Due Date',
+    invoiceDueDate: '',
+    productLineDescription: 'Item Description',
+    productLineQuantity: 'Qty',
+    productLineQuantityRate: 'Rate',
+    productLineQuantityAmount: 'Amount',
+    productLines: [
+        { ...initialProductLine },
+        { ...initialProductLine },
+        { ...initialProductLine },
+        { ...initialProductLine },
+        { ...initialProductLine },
+    ],
+    subTotalLabel: 'Sub Total',
+    taxLabel: 'Tax (10%)',
+    totalLabel: 'TOTAL',
+    currency: 'RM',
+    notesLabel: 'Notes',
+    notes: 'It was great doing business with you.',
+    termLabel: 'Payment Info',
+    term: 'MIRAKAS SDN. BHD. \nBank: CIMB\nAccount No.: 8604875282',
+}

@@ -1,0 +1,25 @@
+{
+    "short_name": "Invoice Generator",
+    "name": "Mirakas Sdn. Bhd. Invoice Generator",
+    "icons": [
+        {
+            "src": "mirakas-logo.png",
+            "sizes": "64x64 32x32 24x24 16x16",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "mirakas-logo.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "mirakas-logo.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#ffffff"
+}
