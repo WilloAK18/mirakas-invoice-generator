@@ -4,7 +4,6 @@ import { initialInvoice, initialProductLine } from '../data/initialData'
 import EditableInput from './EditableInput'
 import EditableTextarea from './EditableTextarea'
 import EditableCalendarInput from './EditableCalendarInput'
-// import headerImage from './data/images/header.png'
 import HeaderImage from './HeaderImage'
 import Document from './Document'
 import Page from './Page'
@@ -13,7 +12,6 @@ import Text from './Text'
 import { Font } from '@react-pdf/renderer'
 import Download from './DownloadPDF'
 import format from 'date-fns/format'
-// import EditableFileImage from './EditableFileImage'
 import Header from '../data/images/header.png'
 import Footer from './Footer'
 
@@ -35,21 +33,11 @@ interface Props {
     pdfMode?: boolean
 }
 
-// const pageBackground = {
-//     position: 'absolute',
-//     minWidth: '100%',
-//     minHeight: '100%',
-//     display: 'block',
-//     height: '100%',
-//     width: '100%',
-// }
-
 const InvoicePage: FC<Props> = ({ data, pdfMode }) => {
     const [invoice, setInvoice] = useState<Invoice>(
         data ? { ...data } : { ...initialInvoice }
     )
     const [subTotal, setSubTotal] = useState<number>()
-    const [saleTax, setSaleTax] = useState<number>()
 
     const dateFormat = 'MMM dd, yyyy'
     const invoiceDate =
@@ -65,12 +53,6 @@ const InvoicePage: FC<Props> = ({ data, pdfMode }) => {
         console.log(name, value)
         if (name !== 'productLines') {
             const newInvoice = { ...invoice }
-
-            if (name === 'logoWidth' && typeof value === 'number') {
-                newInvoice[name] = value
-            } else if (name !== 'logoWidth' && typeof value === 'string') {
-                newInvoice[name] = value
-            }
 
             setInvoice(newInvoice)
         }
@@ -152,21 +134,9 @@ const InvoicePage: FC<Props> = ({ data, pdfMode }) => {
         setSubTotal(subTotal)
     }, [invoice.productLines])
 
-    useEffect(() => {
-        const match = invoice.taxLabel.match(/(\d+)%/)
-        const taxRate = match ? parseFloat(match[1]) : 0
-        const saleTax = subTotal ? (subTotal * taxRate) / 100 : 0
-
-        setSaleTax(saleTax)
-    }, [subTotal, invoice.taxLabel])
-
     return (
         <Document pdfMode={pdfMode}>
             <Page className='invoice-wrapper' pdfMode={pdfMode}>
-                {/* <Image
-                    src='http://imgur.com/nd3yf1Q.png'
-                    //style={pageBackground}
-                /> */}
                 {!pdfMode && <Download data={invoice} />}
                 <View className='w' pdfMode={pdfMode}>
                     <HeaderImage
@@ -448,25 +418,6 @@ const InvoicePage: FC<Props> = ({ data, pdfMode }) => {
                                 </Text>
                             </View>
                         </View>
-                        <View className='flex' pdfMode={pdfMode}>
-                            <View className='w-50 p-5' pdfMode={pdfMode}>
-                                <EditableInput
-                                    value={invoice.taxLabel}
-                                    onChange={(value) =>
-                                        handleChange('taxLabel', value)
-                                    }
-                                    pdfMode={pdfMode}
-                                />
-                            </View>
-                            <View className='w-50 p-5' pdfMode={pdfMode}>
-                                <Text
-                                    className='right bold dark'
-                                    pdfMode={pdfMode}
-                                >
-                                    {saleTax?.toFixed(2)}
-                                </Text>
-                            </View>
-                        </View>
                         <View className='flex bg-gray p-5' pdfMode={pdfMode}>
                             <View className='w-50 p-5' pdfMode={pdfMode}>
                                 <EditableInput
@@ -491,11 +442,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode }) => {
                                     className='right bold dark w-auto'
                                     pdfMode={pdfMode}
                                 >
-                                    {(typeof subTotal !== 'undefined' &&
-                                    typeof saleTax !== 'undefined'
-                                        ? subTotal + saleTax
-                                        : 0
-                                    ).toFixed(2)}
+                                    {subTotal?.toFixed(2)}
                                 </Text>
                             </View>
                         </View>
@@ -532,42 +479,6 @@ const InvoicePage: FC<Props> = ({ data, pdfMode }) => {
                         pdfMode={pdfMode}
                     />
                 </View>
-                {/* <View className='row' pdfMode={pdfMode}></View> */}
-                {/* <View className='mt-20' pdfMode={pdfMode}>
-                    <Text className='dark flex' pdfMode={pdfMode}>
-                        Mirakas Sdn. Bhd.(1401817-M)
-                    </Text>
-                    <Text className='dark flex' pdfMode={pdfMode}>
-                        mirakas.sb@gmail.com
-                    </Text>
-                    <Text className='dark flex' pdfMode={pdfMode}>
-                        +60124071998
-                    </Text>
-                </View> */}
-                {/* <View className='footer flex' pdfMode={pdfMode}>
-                    <View className='w-50 p-5' pdfMode={pdfMode}>
-                        <EditableInput
-                            className='left'
-                            value='Mirakas Sdn. Bhd. (1401817-M)'
-                            pdfMode={pdfMode}
-                        />
-                    </View>
-                    <View className='w-50 p-5' pdfMode={pdfMode}>
-                        <EditableInput
-                            className='center'
-                            value='mirakas.sb@gmail.com'
-                            pdfMode={pdfMode}
-                        />
-                    </View>
-                    <View className='p-5' pdfMode={pdfMode}>
-                        <EditableInput
-                            className='right'
-                            value='+60124071998'
-                            pdfMode={pdfMode}
-                        />
-                    </View>
-                </View> */}
-
                 <Footer className='footer' pdfMode={pdfMode}>
                     <View className='flex' pdfMode={pdfMode}>
                         <View className='w-50' pdfMode={pdfMode}>

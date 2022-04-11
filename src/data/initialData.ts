@@ -1,16 +1,12 @@
 import { ProductLine, Invoice } from './types'
 
 export const initialProductLine: ProductLine = {
-    description: 'test',
+    description: '',
     quantity: '1',
     rate: '0.00',
 }
 
 export const initialInvoice: Invoice = {
-    logo: '',
-    logoWidth: 100,
-    title: 'INVOICE',
-    companyName: '',
     name: '',
     companyAddress: '',
     companyAddress2: '',
@@ -30,19 +26,12 @@ export const initialInvoice: Invoice = {
     productLineQuantity: 'Qty',
     productLineQuantityRate: 'Rate',
     productLineQuantityAmount: 'Amount',
-    productLines: [
-        { ...initialProductLine },
-        { ...initialProductLine },
-        { ...initialProductLine },
-        { ...initialProductLine },
-        { ...initialProductLine },
-    ],
+    productLines: [{ ...initialProductLine }],
     subTotalLabel: 'Sub Total',
-    taxLabel: 'Tax (10%)',
     totalLabel: 'TOTAL',
     currency: 'RM',
     notesLabel: 'Notes',
-    notes: 'It was great doing business with you.',
+    notes: 'Thank you for choosing MIRAKAS.',
     termLabel: 'Payment Info',
     term: 'MIRAKAS SDN. BHD. \nBank: CIMB\nAccount No.: 8604875282',
 }
