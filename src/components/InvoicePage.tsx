@@ -53,7 +53,9 @@ const InvoicePage: FC<Props> = ({ data, pdfMode }) => {
         console.log(name, value)
         if (name !== 'productLines') {
             const newInvoice = { ...invoice }
-
+            if (typeof value === 'string') {
+                newInvoice[name] = value
+            }
             setInvoice(newInvoice)
         }
     }
